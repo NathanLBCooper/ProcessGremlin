@@ -7,13 +7,12 @@ using System.Threading.Tasks;
 
 using ProcessGremlins;
 
-namespace ProcessGremlinImplementations.GremlinStrategy
+namespace ProcessGremlinImplementations
 {
     //todo seems to kill all
     public class KillBusyGremlin : IProcessGremlin
     {
         private readonly float busyThreshold;
-        private readonly object locker = new object();
 
         // busyThreshold in % of core being used, ie up to 400 on a 4-core
         public KillBusyGremlin(float busyThreshold)
@@ -23,11 +22,16 @@ namespace ProcessGremlinImplementations.GremlinStrategy
 
         public void Invoke(IEnumerable<Process> data)
         {
+            var processActions = new List<Action>();
+
             var busyProcesses = data.Where(process => this.GetCpuUsage(process) > this.busyThreshold).ToList();
             foreach (var process in busyProcesses)
             {
-                process.Kill();
+                var closureSafeProcess = process;
+                processActions.Add(() => closureSafeProcess.Kill());
             }
+
+            processActions.ForEach(action => action.Invoke());
         }
 
         private float GetCpuUsage(Process process)
@@ -48,11 +52,10 @@ namespace ProcessGremlinImplementations.GremlinStrategy
             string instanceName = null;
             foreach (string instance in instances)
             {
-                using (PerformanceCounter cnt = new PerformanceCounter("Process",
+                using (PerformanceCounter counter = new PerformanceCounter("Process",
                      "ID Process", instance, true))
                 {
-                    int val = (int)cnt.RawValue;
-                    if (val == process.Id)
+                    if ((int)counter.RawValue == process.Id)
                     {
                         instanceName = instance;
                         break;

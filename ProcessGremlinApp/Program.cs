@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 using ProcessGremlins;
 
 using ProcessGremlinImplementations;
-using ProcessGremlinImplementations.GremlinStrategy;
 
 namespace ProcessGremlinApp
 {
