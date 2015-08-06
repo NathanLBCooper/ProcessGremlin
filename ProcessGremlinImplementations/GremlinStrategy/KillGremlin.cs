@@ -7,11 +7,11 @@ namespace ProcessGremlinImplementations
 {
     public class KillGremlin : IProcessGremlin
     {
-        private readonly ProcessGremlin gremlin;
+        private readonly SimpleProcessGremlin gremlin;
 
         public KillGremlin()
         {
-            this.gremlin = new ProcessGremlin(
+            this.gremlin = new SimpleProcessGremlin(
                 processes =>
                 {
                     foreach (var process in processes)

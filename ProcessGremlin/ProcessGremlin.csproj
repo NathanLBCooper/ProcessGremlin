@@ -45,7 +45,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ProcessGremlin\IProcessGremlin.cs" />
-    <Compile Include="ProcessGremlin\ProcessGremlin.cs" />
     <Compile Include="GremlinCore\GenericTimer.cs" />
     <Compile Include="GremlinCore\GremlinTimerBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
