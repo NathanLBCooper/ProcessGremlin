@@ -4,16 +4,16 @@ using System.Diagnostics;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProcessGremlin
+namespace ProcessGremlins
 {
     public class GremlinTimerBuilder
     {
-        public GenericTimer CreateGremlinTimer(Func<IEnumerable<Process>> finder, Action<IEnumerable<Process>> gremlinstrategy, double intervalMs)
+        public GenericTimer CreateGremlinTimer<T>(Func<T> finder, IGremlin<T> gremlinstrategy, double intervalMs)
         {
             return new GenericTimer(
                 () =>
                 {
-                    gremlinstrategy(finder.Invoke());
+                    gremlinstrategy.Invoke(finder.Invoke());
                 },
                 intervalMs);
         }

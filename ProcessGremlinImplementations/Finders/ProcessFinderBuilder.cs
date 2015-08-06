@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 
-namespace ProcessGremlin
+namespace ProcessGremlinImplementations
 {
-    public class FinderBuilder
+    public class ProcessFinderBuilder
     {
         public Func<IEnumerable<Process>> GetNameBasedFinder(string name)
         {

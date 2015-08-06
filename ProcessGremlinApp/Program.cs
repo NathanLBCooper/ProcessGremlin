@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using ProcessGremlin;
+using ProcessGremlins;
+
+using ProcessGremlinImplementations;
 
 namespace ProcessGremlinApp
 {
@@ -12,18 +15,26 @@ namespace ProcessGremlinApp
     {
         static void Main(string[] args)
         {
-            var gremlins = new GremlinBuilder();
-            var finders = new FinderBuilder();
+            var finders = new ProcessFinderBuilder();
             var timerBuilder = new GremlinTimerBuilder();
 
-            var random = new Random();
+            //using (
+            //    var gremlinTimer =
+            //        timerBuilder.CreateGremlinTimer(
+            //            finders.ConcatFinders(new[] { finders.GetNameBasedFinder("notepad"), finders.GetNameBasedFinder("python") }),
+            //            new KillRandomGremlin(), 
+            //            1000))
+            //{
+            //    gremlinTimer.Start();
+            //    Console.ReadKey();
+            //}
 
             using (
                 var gremlinTimer =
                     timerBuilder.CreateGremlinTimer(
-                        finders.ConcatFinders(new[] { finders.GetNameBasedFinder("notepad"), finders.GetNameBasedFinder("python") }),
-                        gremlins.KillRandom(random),
-                        1000))
+                        finders.ConcatFinders(new[] { finders.GetNameBasedFinder("notepad"), finders.GetNameBasedFinder("python"), finders.GetNameBasedFinder("cmd") }),
+                        new EvenLoadPerNameGremlin(),
+                        3000))
             {
                 gremlinTimer.Start();
                 Console.ReadKey();

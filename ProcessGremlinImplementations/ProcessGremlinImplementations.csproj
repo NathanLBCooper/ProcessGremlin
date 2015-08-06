@@ -4,16 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{15F60649-0EBA-443A-A3F5-C0271173A088}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{54F0A358-8F2B-49C3-B618-EF81C9126017}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ProcessGremlinApp</RootNamespace>
-    <AssemblyName>ProcessGremlinApp</AssemblyName>
+    <RootNamespace>ProcessGremlinImplementations</RootNamespace>
+    <AssemblyName>ProcessGremlinImplementations</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,7 +22,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -32,10 +30,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CommandLine, Version=1.9.71.2, Culture=neutral, PublicKeyToken=de6f01bd326f8c32, processorArchitecture=MSIL">
-      <HintPath>..\packages\CommandLineParser.1.9.71\lib\net45\CommandLine.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -45,18 +39,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="Finders\ProcessFinderBuilder.cs" />
+    <Compile Include="GremlinStrategy\EvenLoadPerNameGremlin.cs" />
+    <Compile Include="GremlinStrategy\KillGremlin.cs" />
+    <Compile Include="GremlinStrategy\KillRandomGremlin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\ProcessGremlinImplementations\ProcessGremlinImplementations.csproj">
-      <Project>{54f0a358-8f2b-49c3-b618-ef81c9126017}</Project>
-      <Name>ProcessGremlinImplementations</Name>
-    </ProjectReference>
     <ProjectReference Include="..\ProcessGremlin\ProcessGremlin.csproj">
       <Project>{4fb846b6-b7da-44d3-921a-865580b56959}</Project>
       <Name>ProcessGremlin</Name>
