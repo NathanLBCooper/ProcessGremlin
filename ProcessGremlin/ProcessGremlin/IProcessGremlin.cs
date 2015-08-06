@@ -3,8 +3,8 @@ using System.Diagnostics;
 
 namespace ProcessGremlins
 {
-    public interface IProcessGremlin : IGremlin<IEnumerable<Process>>
+    public interface IProcessGremlin
     {
-        
+        void Invoke(IEnumerable<Process> data);
     }
 }

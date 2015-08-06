@@ -34,7 +34,7 @@ namespace ProcessGremlinApp
                     timerBuilder.CreateGremlinTimer(
                         finders.ConcatFinders(new[] { finders.GetNameBasedFinder("notepad"), finders.GetNameBasedFinder("python"), finders.GetNameBasedFinder("cmd") }),
                         new EvenLoadPerNameGremlin(),
-                        3000))
+                        10000))
             {
                 gremlinTimer.Start();
                 Console.ReadKey();
