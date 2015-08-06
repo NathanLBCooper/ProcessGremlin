@@ -43,7 +43,6 @@
     <Compile Include="GremlinStrategy\SimpleProcessGremlin.cs" />
     <Compile Include="GremlinStrategy\EvenLoadPerNameGremlin.cs" />
     <Compile Include="GremlinStrategy\KillGremlin.cs" />
-    <Compile Include="GremlinStrategy\KillRandomGremlin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
