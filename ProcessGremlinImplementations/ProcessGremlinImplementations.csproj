@@ -40,7 +40,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Finders\ProcessFinderBuilder.cs" />
-    <Compile Include="GremlinStrategy\KillRandomGremlin.cs" />
     <Compile Include="GremlinStrategy\SimpleProcessGremlin.cs" />
     <Compile Include="GremlinStrategy\EvenLoadPerNameGremlin.cs" />
     <Compile Include="GremlinStrategy\KillGremlin.cs" />
