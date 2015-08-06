@@ -7,7 +7,7 @@ using ProcessGremlins;
 
 namespace ProcessGremlinImplementations
 {
-    // Just an example, I don't particularly stand by this implementation
+    // Just an example, I don't particularly stand by this implementation //todo may be better to do via Action rather than Gremlin
     public class EvenLoadPerNameGremlin : IProcessGremlin
     {
         private readonly Queue<string> queue = new Queue<string>(); 

@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using ProcessGremlins;
 
 using ProcessGremlinImplementations;
+using ProcessGremlinImplementations.GremlinStrategy;
 
 namespace ProcessGremlinApp
 {
@@ -32,9 +33,9 @@ namespace ProcessGremlinApp
             using (
                 var gremlinTimer =
                     timerBuilder.CreateGremlinTimer(
-                        finders.ConcatFinders(new[] { finders.GetNameBasedFinder("notepad"), finders.GetNameBasedFinder("python"), finders.GetNameBasedFinder("cmd") }),
-                        new EvenLoadPerNameGremlin(),
-                        10000))
+                        finders.ConcatFinders(new[] { finders.GetNameBasedFinder("firefox") }),
+                        new KillBusyGremlin(20), 
+                        1000))
             {
                 gremlinTimer.Start();
                 Console.ReadKey();

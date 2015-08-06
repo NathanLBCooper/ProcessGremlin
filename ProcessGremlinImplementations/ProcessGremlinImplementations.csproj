@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Finders\ProcessFinderBuilder.cs" />
+    <Compile Include="GremlinStrategy\KillBusyGremlin.cs" />
     <Compile Include="GremlinStrategy\SimpleProcessGremlin.cs" />
     <Compile Include="GremlinStrategy\EvenLoadPerNameGremlin.cs" />
     <Compile Include="GremlinStrategy\KillGremlin.cs" />
@@ -50,6 +51,9 @@
       <Project>{4fb846b6-b7da-44d3-921a-865580b56959}</Project>
       <Name>ProcessGremlin</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Actions\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

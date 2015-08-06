@@ -17,5 +17,10 @@ namespace ProcessGremlins
                 },
                 intervalMs);
         }
+
+        public GenericTimer CreateGremlinTimer(Action finderAndGremlin, double intervalMs)
+        {
+            return new GenericTimer(finderAndGremlin.Invoke, intervalMs);
+        }
     }
 }
