@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{4FB846B6-B7DA-44D3-921A-865580B56959}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{15F60649-0EBA-443A-A3F5-C0271173A088}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ProcessGremlin</RootNamespace>
-    <AssemblyName>ProcessGremlin</AssemblyName>
+    <RootNamespace>ProcessGremlinApp</RootNamespace>
+    <AssemblyName>ProcessGremlinApp</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -31,9 +31,6 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup>
-    <StartupObject />
-  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -44,14 +41,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FinderBuilder.cs" />
-    <Compile Include="GenericTimer.cs" />
-    <Compile Include="GremlinBuilder.cs" />
-    <Compile Include="GremlinTimerBuilder.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ProcessGremlin\ProcessGremlin.csproj">
+      <Project>{4fb846b6-b7da-44d3-921a-865580b56959}</Project>
+      <Name>ProcessGremlin</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
