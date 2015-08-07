@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Linq;
 
 using ProcessGremlins;
+using ProcessGremlinImplementations.Logging;
 
 namespace ProcessGremlinImplementations
 {
@@ -10,12 +11,14 @@ namespace ProcessGremlinImplementations
     {
         private readonly float busyThreshold;
         private readonly IProcessFinder finder;
+        private readonly IEventLogger logger;
 
         // busyThreshold in % of core being used, ie up to 400 on a 4-core
-        public KillBusyGremlin(IProcessFinder processFinder, float busyThreshold)
+        public KillBusyGremlin(IProcessFinder processFinder, float busyThreshold, IEventLogger logger)
         {
             this.busyThreshold = busyThreshold;
             this.finder = processFinder;
+            this.logger = logger;
         }
 
         public void Meddle()
@@ -24,8 +27,8 @@ namespace ProcessGremlinImplementations
             var busyProcesses = data.Where(process => this.GetCpuUsage(process) > this.busyThreshold).ToList();
             foreach (var process in busyProcesses)
             {
-                Console.WriteLine("killing {0}", process.ProcessName); //todo nlog
                 process.Kill();
+                this.logger.Log(new ProcessKilledEvent(process));    
             }
         }
 

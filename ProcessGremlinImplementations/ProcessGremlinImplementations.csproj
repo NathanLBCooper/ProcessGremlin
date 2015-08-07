@@ -30,6 +30,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.4.0.1\lib\net45\NLog.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -44,6 +48,14 @@
     <Compile Include="GremlinStrategy\SimpleProcessGremlin.cs" />
     <Compile Include="GremlinStrategy\EvenLoadPerNameGremlin.cs" />
     <Compile Include="GremlinStrategy\KillGremlin.cs" />
+    <Compile Include="Logging\Event.cs" />
+    <Compile Include="Logging\EventLogger.cs" />
+    <Compile Include="Logging\Events\ApplicationEndingEvent.cs" />
+    <Compile Include="Logging\Events\ApplicationStartedEvent.cs" />
+    <Compile Include="Logging\Events\FailureEvent.cs" />
+    <Compile Include="Logging\IEvent.cs" />
+    <Compile Include="Logging\IEventLogger.cs" />
+    <Compile Include="Logging\Events\ProcessKilledEvent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -52,8 +64,9 @@
       <Name>ProcessGremlin</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Actions\" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

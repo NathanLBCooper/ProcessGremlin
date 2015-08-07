@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using ProcessGremlins;
+using ProcessGremlinImplementations.Logging;
 
 namespace ProcessGremlinImplementations
 {
@@ -10,15 +11,17 @@ namespace ProcessGremlinImplementations
     {
         private readonly IEnumerable<IProcessFinder> processFinders;
         private readonly IEnumerator<IProcessFinder> processFinderEnumerator;
+        private readonly IEventLogger logger;
 
-        public EvenLoadPerNameGremlin(IEnumerable<IProcessFinder> processFinders)
+        public EvenLoadPerNameGremlin(IEnumerable<IProcessFinder> processFinders, IEventLogger logger)
         {
             this.processFinders = processFinders;
             this.processFinderEnumerator = this.processFinders.GetEnumerator();
+            this.logger = logger;
         }
 
-        public EvenLoadPerNameGremlin(List<string> processNames, ProcessFinderBuilder finderBuilder)
-            : this(finderBuilder.GetMultipleNameFinders(processNames))
+        public EvenLoadPerNameGremlin(List<string> processNames, ProcessFinderBuilder finderBuilder, IEventLogger logger)
+            : this(finderBuilder.GetMultipleNameFinders(processNames), logger)
         {
         }
 
@@ -35,8 +38,9 @@ namespace ProcessGremlinImplementations
                 var processesOfName = this.processFinderEnumerator.Current.Find().ToList();
                 if (processesOfName.Count != 0)
                 {
-                    Console.WriteLine("Killed {0}", processesOfName.First().ProcessName);
-                    processesOfName.First().Kill();
+                    var process = processesOfName.First();
+                    process.Kill();
+                    this.logger.Log(new ProcessKilledEvent(process));             
                     return;
                 }
             }

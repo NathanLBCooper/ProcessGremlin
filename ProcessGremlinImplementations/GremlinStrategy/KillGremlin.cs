@@ -1,5 +1,7 @@
 using System;
 
+using ProcessGremlinImplementations.Logging;
+
 using ProcessGremlins;
 
 namespace ProcessGremlinImplementations
@@ -7,16 +9,17 @@ namespace ProcessGremlinImplementations
     public class KillGremlin : IGremlin
     {
         private readonly SimpleProcessGremlin gremlin;
+        private readonly IEventLogger logger;
 
-        public KillGremlin(IProcessFinder processFinder)
+        public KillGremlin(IProcessFinder processFinder, IEventLogger logger)
         {
             this.gremlin = new SimpleProcessGremlin(
                 processes =>
                 {
                     foreach (var process in processes)
                     {
-                        Console.WriteLine("killing {0}", process.ProcessName); //todo nlog
                         process.Kill();
+                        this.logger.Log(new ProcessKilledEvent(process));
                     }
                 }, processFinder);
         }
