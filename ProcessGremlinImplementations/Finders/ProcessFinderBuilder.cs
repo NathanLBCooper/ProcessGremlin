@@ -19,7 +19,7 @@ namespace ProcessGremlinImplementations
             return names.Select(this.GetNameBasedFinder);
         }
 
-        public IProcessFinder GetSingleNameFinder(IEnumerable<string> names)
+        public IProcessFinder GetNameBasedFinder(IEnumerable<string> names)
         {
             return new ProcessFinder(this.GetMultipleNameFinders(names));
         }

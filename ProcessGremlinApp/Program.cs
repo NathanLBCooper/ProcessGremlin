@@ -1,10 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 using ProcessGremlins;
 
 using ProcessGremlinImplementations;
@@ -14,7 +8,6 @@ namespace ProcessGremlinApp
 {
     public class Program
     {
-        // todo ioc
         private static readonly IEventLogger Logger = new EventLogger();
 
         static void Main(string[] args)
@@ -22,17 +15,31 @@ namespace ProcessGremlinApp
             Logger.Log(new ApplicationStartedEvent());
             AppDomain.CurrentDomain.ProcessExit += new EventHandler(CurrentDomain_ProcessExit);
 
-            //todo ioc
             var finderBuilder = new ProcessFinderBuilder();
             var timerBuilder = new GremlinTimerBuilder();
 
-            // todo arguments + config etc
+            var parser = new ArgumentParser();
+            Arguments arguments;
+            if (!parser.TryParse(args, out arguments))
+            {
+                Logger.Log(new FailureEvent("Arguments do not parse"));
+                return;
+            }
+
+            IGremlin gremlin;
+            if (!arguments.TryBuildGremlin(finderBuilder, Logger, out gremlin))
+            {
+                Logger.Log(new FailureEvent("Arguments do not parse"));
+                return;
+            }
+
             using (
                 var gremlinTimer =
-                    timerBuilder.CreateGremlinTimer(new KillBusyGremlin(finderBuilder.GetNameBasedFinder("notepad"), 70, Logger), 500)
+                    timerBuilder.CreateGremlinTimer(gremlin, arguments.GetTimerIntervalMs())
                 )
             {
                 gremlinTimer.Start();
+                Console.WriteLine("Press any key to exit");
                 Console.ReadKey();
             }
         }

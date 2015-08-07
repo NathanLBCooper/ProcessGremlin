@@ -9,12 +9,12 @@ namespace ProcessGremlinImplementations
 {
     public class KillBusyGremlin : IGremlin
     {
-        private readonly float busyThreshold;
+        private readonly int busyThreshold;
         private readonly IProcessFinder finder;
         private readonly IEventLogger logger;
 
         // busyThreshold in % of core being used, ie up to 400 on a 4-core
-        public KillBusyGremlin(IProcessFinder processFinder, float busyThreshold, IEventLogger logger)
+        public KillBusyGremlin(IProcessFinder processFinder, int busyThreshold, IEventLogger logger)
         {
             this.busyThreshold = busyThreshold;
             this.finder = processFinder;
@@ -32,13 +32,13 @@ namespace ProcessGremlinImplementations
             }
         }
 
-        private float GetCpuUsage(Process process)
+        private int GetCpuUsage(Process process)
         {
             var cpuCounter = new PerformanceCounter("Process", "% Processor Time", this.GetInstanceName(process), true);
             cpuCounter.NextValue();
             System.Threading.Thread.Sleep(1000);
             var usage = cpuCounter.NextValue();
-            return usage;
+            return (int)usage;
         }
 
 
