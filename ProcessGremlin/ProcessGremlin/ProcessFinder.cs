@@ -16,10 +16,10 @@ namespace ProcessGremlins
 
         public ProcessFinder(IEnumerable<IProcessFinder> finders)
         {
-            this.finderFunc = () => finders.SelectMany(finder => finder.Invoke()); 
+            this.finderFunc = () => finders.SelectMany(finder => finder.Find()); 
         }
 
-        public IEnumerable<Process> Invoke()
+        public IEnumerable<Process> Find()
         {
             return this.finderFunc.Invoke();
         }

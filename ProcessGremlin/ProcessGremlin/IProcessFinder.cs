@@ -5,6 +5,6 @@ namespace ProcessGremlins
 {
     public interface IProcessFinder
     {
-        IEnumerable<Process> Invoke();
+        IEnumerable<Process> Find();
     }
 }

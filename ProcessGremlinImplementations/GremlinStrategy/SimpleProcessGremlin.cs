@@ -17,9 +17,9 @@ namespace ProcessGremlinImplementations
             this.finder = processFinder;
         }
 
-        public void Invoke()
+        public void Meddle()
         {
-            this.gremlinAction.Invoke(this.finder.Invoke());
+            this.gremlinAction.Invoke(this.finder.Find());
         }
     }
 }

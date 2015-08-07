@@ -10,7 +10,7 @@ namespace ProcessGremlins
     {
         public GenericTimer CreateGremlinTimer(IGremlin gremlin, double intervalMs)
         {
-            return new GenericTimer(gremlin.Invoke, intervalMs);
+            return new GenericTimer(gremlin.Meddle, intervalMs);
         }
 
         public GenericTimer CreateGremlinTimer(Action gremlin, double intervalMs)

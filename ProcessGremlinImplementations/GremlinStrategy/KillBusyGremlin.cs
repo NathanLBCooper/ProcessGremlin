@@ -18,12 +18,13 @@ namespace ProcessGremlinImplementations
             this.finder = processFinder;
         }
 
-        public void Invoke()
+        public void Meddle()
         {
-            var data = this.finder.Invoke();
+            var data = this.finder.Find();
             var busyProcesses = data.Where(process => this.GetCpuUsage(process) > this.busyThreshold).ToList();
             foreach (var process in busyProcesses)
             {
+                Console.WriteLine("killing {0}", process.ProcessName); //todo nlog
                 process.Kill();
             }
         }

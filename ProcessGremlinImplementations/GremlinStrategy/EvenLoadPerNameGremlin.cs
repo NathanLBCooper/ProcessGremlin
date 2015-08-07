@@ -22,7 +22,7 @@ namespace ProcessGremlinImplementations
         {
         }
 
-        public void Invoke()
+        public void Meddle()
         {
             for (int i = 0; i < this.processFinders.Count(); i++)
             {
@@ -32,7 +32,7 @@ namespace ProcessGremlinImplementations
                     processFinderEnumerator.MoveNext();
                 }
 
-                var processesOfName = this.processFinderEnumerator.Current.Invoke().ToList();
+                var processesOfName = this.processFinderEnumerator.Current.Find().ToList();
                 if (processesOfName.Count != 0)
                 {
                     Console.WriteLine("Killed {0}", processesOfName.First().ProcessName);

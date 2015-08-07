@@ -1,3 +1,5 @@
+using System;
+
 using ProcessGremlins;
 
 namespace ProcessGremlinImplementations
@@ -13,14 +15,15 @@ namespace ProcessGremlinImplementations
                 {
                     foreach (var process in processes)
                     {
+                        Console.WriteLine("killing {0}", process.ProcessName); //todo nlog
                         process.Kill();
                     }
                 }, processFinder);
         }
 
-        public void Invoke()
+        public void Meddle()
         {
-            this.gremlin.Invoke();
+            this.gremlin.Meddle();
         }
     }
 }
