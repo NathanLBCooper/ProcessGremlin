@@ -49,6 +49,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ArgumentParser.cs" />
+    <Compile Include="Arguments.cs" />
+    <Compile Include="CommonOptions.cs" />
+    <Compile Include="KillBusySubOptions.cs" />
     <Compile Include="Options.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
