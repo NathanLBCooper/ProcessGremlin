@@ -6,18 +6,20 @@ using ProcessGremlins;
 
 namespace ProcessGremlinImplementations
 {
-    public class SimpleProcessGremlin : IProcessGremlin
+    public class SimpleProcessGremlin : IGremlin
     {
         private readonly Action<IEnumerable<Process>> gremlinAction;
+        private readonly IProcessFinder finder;
 
-        public SimpleProcessGremlin(Action<IEnumerable<Process>> action)
+        public SimpleProcessGremlin(Action<IEnumerable<Process>> action, IProcessFinder processFinder)
         {
             this.gremlinAction = action;
+            this.finder = processFinder;
         }
 
-        public void Invoke(IEnumerable<Process> data)
+        public void Invoke()
         {
-            this.gremlinAction.Invoke(data);
+            this.gremlinAction.Invoke(this.finder.Invoke());
         }
     }
 }

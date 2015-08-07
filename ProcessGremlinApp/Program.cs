@@ -15,26 +15,13 @@ namespace ProcessGremlinApp
     {
         static void Main(string[] args)
         {
-            var finders = new ProcessFinderBuilder();
+            var finderBuilder = new ProcessFinderBuilder();
             var timerBuilder = new GremlinTimerBuilder();
-
-            //using (
-            //    var gremlinTimer =
-            //        timerBuilder.CreateGremlinTimer(
-            //            finders.ConcatFinders(new[] { finders.GetNameBasedFinder("notepad"), finders.GetNameBasedFinder("python") }),
-            //            new KillRandomGremlin(), 
-            //            1000))
-            //{
-            //    gremlinTimer.Start();
-            //    Console.ReadKey();
-            //}
 
             using (
                 var gremlinTimer =
-                    timerBuilder.CreateGremlinTimer(
-                        finders.ConcatFinders(new[] { finders.GetNameBasedFinder("firefox") }),
-                        new KillBusyGremlin(20), 
-                        1000))
+                    timerBuilder.CreateGremlinTimer(new EvenLoadPerNameGremlin(finderBuilder.GetMultipleNameFinders(new[] { "notepad", "python", "cmd" })), 500)
+                )
             {
                 gremlinTimer.Start();
                 Console.ReadKey();

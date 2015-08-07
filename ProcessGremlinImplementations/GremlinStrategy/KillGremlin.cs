@@ -1,15 +1,12 @@
-using System.Collections.Generic;
-using System.Diagnostics;
-
 using ProcessGremlins;
 
 namespace ProcessGremlinImplementations
 {
-    public class KillGremlin : IProcessGremlin
+    public class KillGremlin : IGremlin
     {
         private readonly SimpleProcessGremlin gremlin;
 
-        public KillGremlin()
+        public KillGremlin(IProcessFinder processFinder)
         {
             this.gremlin = new SimpleProcessGremlin(
                 processes =>
@@ -18,12 +15,12 @@ namespace ProcessGremlinImplementations
                     {
                         process.Kill();
                     }
-                });
+                }, processFinder);
         }
 
-        public void Invoke(IEnumerable<Process> data)
+        public void Invoke()
         {
-            this.gremlin.Invoke(data);
+            this.gremlin.Invoke();
         }
     }
 }

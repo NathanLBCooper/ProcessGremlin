@@ -3,19 +3,25 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 
+using ProcessGremlins;
+
 namespace ProcessGremlinImplementations
 {
     public class ProcessFinderBuilder
     {
-        public Func<IEnumerable<Process>> GetNameBasedFinder(string name)
+        public IProcessFinder GetNameBasedFinder(string name)
         {
-            return () => Process.GetProcessesByName(name);
+            return new ProcessFinder(() => Process.GetProcessesByName(name));
         }
 
-        public Func<IEnumerable<Process>> ConcatFinders(IEnumerable<Func<IEnumerable<Process>>> finders)
+        public IEnumerable<IProcessFinder> GetMultipleNameFinders(IEnumerable<string> names)
         {
-            return () =>
-            { return finders.SelectMany(finder => finder.Invoke()); };
+            return names.Select(this.GetNameBasedFinder);
+        }
+
+        public IProcessFinder GetSingleNameFinder(IEnumerable<string> names)
+        {
+            return new ProcessFinder(this.GetMultipleNameFinders(names));
         }
     }
 }

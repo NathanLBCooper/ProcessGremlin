@@ -8,19 +8,14 @@ namespace ProcessGremlins
 {
     public class GremlinTimerBuilder
     {
-        public GenericTimer CreateGremlinTimer(Func<IEnumerable<Process>> finder, IProcessGremlin gremlinstrategy, double intervalMs)
+        public GenericTimer CreateGremlinTimer(IGremlin gremlin, double intervalMs)
         {
-            return new GenericTimer(
-                () =>
-                {
-                    gremlinstrategy.Invoke(finder.Invoke());
-                },
-                intervalMs);
+            return new GenericTimer(gremlin.Invoke, intervalMs);
         }
 
-        public GenericTimer CreateGremlinTimer(Action finderAndGremlin, double intervalMs)
+        public GenericTimer CreateGremlinTimer(Action gremlin, double intervalMs)
         {
-            return new GenericTimer(finderAndGremlin.Invoke, intervalMs);
+            return new GenericTimer(gremlin.Invoke, intervalMs);
         }
     }
 }

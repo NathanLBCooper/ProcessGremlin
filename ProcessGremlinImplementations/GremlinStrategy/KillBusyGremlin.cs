@@ -1,37 +1,31 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using ProcessGremlins;
 
 namespace ProcessGremlinImplementations
 {
-    //todo seems to kill all
-    public class KillBusyGremlin : IProcessGremlin
+    public class KillBusyGremlin : IGremlin
     {
         private readonly float busyThreshold;
+        private readonly IProcessFinder finder;
 
         // busyThreshold in % of core being used, ie up to 400 on a 4-core
-        public KillBusyGremlin(float busyThreshold)
+        public KillBusyGremlin(IProcessFinder processFinder, float busyThreshold)
         {
             this.busyThreshold = busyThreshold;
+            this.finder = processFinder;
         }
 
-        public void Invoke(IEnumerable<Process> data)
+        public void Invoke()
         {
-            var processActions = new List<Action>();
-
+            var data = this.finder.Invoke();
             var busyProcesses = data.Where(process => this.GetCpuUsage(process) > this.busyThreshold).ToList();
             foreach (var process in busyProcesses)
             {
-                var closureSafeProcess = process;
-                processActions.Add(() => closureSafeProcess.Kill());
+                process.Kill();
             }
-
-            processActions.ForEach(action => action.Invoke());
         }
 
         private float GetCpuUsage(Process process)

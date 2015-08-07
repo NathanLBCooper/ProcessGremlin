@@ -1,69 +1,45 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 
 using ProcessGremlins;
 
 namespace ProcessGremlinImplementations
 {
-    // Just an example, I don't particularly stand by this implementation //todo may be better to do via Action rather than Gremlin
-    public class EvenLoadPerNameGremlin : IProcessGremlin
+    public class EvenLoadPerNameGremlin : IGremlin
     {
-        private readonly Queue<string> queue = new Queue<string>(); 
+        private readonly IEnumerable<IProcessFinder> processFinders;
+        private readonly IEnumerator<IProcessFinder> processFinderEnumerator;
 
-        public void Invoke(IEnumerable<Process> data)
+        public EvenLoadPerNameGremlin(IEnumerable<IProcessFinder> processFinders)
         {
-            var processList = data.ToList();
-            var groupedByProcess = processList.GroupBy(x => x.ProcessName).Select(y => y.ToList()).OrderBy(z => z.First().ProcessName).ToList();
-
-            if (groupedByProcess.Count == 0)
-            {
-                return;
-            }
-
-            List<string> names = groupedByProcess.Select(
-                x =>
-                {
-                    var firstProcess = x.FirstOrDefault();
-                    if (firstProcess == null) return null;
-                    return firstProcess.ProcessName;
-                }).ToList();
-
-            
-            var undiscovered = names.Where(x => !queue.Contains(x)).ToList();
-
-            if (undiscovered.Count > 0)
-            {
-                this.StopFirstOfName(undiscovered.First(), processList);
-                return;
-            }
-
-            string leastRecentlyStopped = null;
-            while (this.queue.Count > 0)
-            {
-                var lastOfQueue = this.queue.Dequeue();
-                if (names.Contains(lastOfQueue))
-                {
-                    leastRecentlyStopped = lastOfQueue;
-                    break;
-                }
-            }
-
-            if (leastRecentlyStopped != null)
-            {
-                this.StopFirstOfName(leastRecentlyStopped, processList);
-                return;
-            }
-
-            this.StopFirstOfName(names.First(), processList);
+            this.processFinders = processFinders;
+            this.processFinderEnumerator = this.processFinders.GetEnumerator();
         }
 
-        private void StopFirstOfName(string name, IEnumerable<Process> processes)
+        public EvenLoadPerNameGremlin(List<string> processNames, ProcessFinderBuilder finderBuilder)
+            : this(finderBuilder.GetMultipleNameFinders(processNames))
         {
-            var process = processes.First(x => x.ProcessName == name);
-            process.Kill();
-            this.queue.Enqueue(name);
+        }
+
+        public void Invoke()
+        {
+            for (int i = 0; i < this.processFinders.Count(); i++)
+            {
+                if (!this.processFinderEnumerator.MoveNext())
+                {
+                    processFinderEnumerator.Reset();
+                    processFinderEnumerator.MoveNext();
+                }
+
+                var processesOfName = this.processFinderEnumerator.Current.Invoke().ToList();
+                if (processesOfName.Count != 0)
+                {
+                    Console.WriteLine("Killed {0}", processesOfName.First().ProcessName);
+                    processesOfName.First().Kill();
+                    return;
+                }
+            }
         }
     }
 }
