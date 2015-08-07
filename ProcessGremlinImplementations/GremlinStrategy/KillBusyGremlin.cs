@@ -12,6 +12,7 @@ namespace ProcessGremlinImplementations
         private readonly int busyThreshold;
         private readonly IProcessFinder finder;
         private readonly IEventLogger logger;
+        private const int SampleTime = 1000;
 
         // busyThreshold in % of core being used, ie up to 400 on a 4-core
         public KillBusyGremlin(IProcessFinder processFinder, int busyThreshold, IEventLogger logger)
@@ -36,7 +37,7 @@ namespace ProcessGremlinImplementations
         {
             var cpuCounter = new PerformanceCounter("Process", "% Processor Time", this.GetInstanceName(process), true);
             cpuCounter.NextValue();
-            System.Threading.Thread.Sleep(1000);
+            System.Threading.Thread.Sleep(SampleTime);
             var usage = cpuCounter.NextValue();
             return (int)usage;
         }
