@@ -24,12 +24,19 @@ namespace ProcessGremlinImplementations
 
         public void Meddle()
         {
-            var data = this.finder.Find();
-            var busyProcesses = data.Where(process => this.GetCpuUsage(process) > this.busyThreshold).ToList();
-            foreach (var process in busyProcesses)
+            try
             {
-                process.Kill();
-                this.logger.Log(new ProcessKilledEvent(process));    
+                var data = this.finder.Find();
+                var busyProcesses = data.Where(process => this.GetCpuUsage(process) > this.busyThreshold).ToList();
+                foreach (var process in busyProcesses)
+                {
+                    process.Kill();
+                    this.logger.Log(new ProcessKilledEvent(process));
+                }
+            }
+            catch(Exception exception)
+            {
+                this.logger.Log(new ErrorEvent(exception));
             }
         }
 

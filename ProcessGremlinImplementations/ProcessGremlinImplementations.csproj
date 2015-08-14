@@ -52,6 +52,7 @@
     <Compile Include="Logging\EventLogger.cs" />
     <Compile Include="Logging\Events\ApplicationEndingEvent.cs" />
     <Compile Include="Logging\Events\ApplicationStartedEvent.cs" />
+    <Compile Include="Logging\Events\ErrorEvent.cs" />
     <Compile Include="Logging\Events\FailureEvent.cs" />
     <Compile Include="Logging\IEvent.cs" />
     <Compile Include="Logging\IEventLogger.cs" />

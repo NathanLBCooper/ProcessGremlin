@@ -27,22 +27,29 @@ namespace ProcessGremlinImplementations
 
         public void Meddle()
         {
-            for (int i = 0; i < this.processFinders.Count(); i++)
+            try
             {
-                if (!this.processFinderEnumerator.MoveNext())
+                for (int i = 0; i < this.processFinders.Count(); i++)
                 {
-                    processFinderEnumerator.Reset();
-                    processFinderEnumerator.MoveNext();
-                }
+                    if (!this.processFinderEnumerator.MoveNext())
+                    {
+                        processFinderEnumerator.Reset();
+                        processFinderEnumerator.MoveNext();
+                    }
 
-                var processesOfName = this.processFinderEnumerator.Current.Find().ToList();
-                if (processesOfName.Count != 0)
-                {
-                    var process = processesOfName.First();
-                    process.Kill();
-                    this.logger.Log(new ProcessKilledEvent(process));             
-                    return;
+                    var processesOfName = this.processFinderEnumerator.Current.Find().ToList();
+                    if (processesOfName.Count != 0)
+                    {
+                        var process = processesOfName.First();
+                        process.Kill();
+                        this.logger.Log(new ProcessKilledEvent(process));
+                        return;
+                    }
                 }
+            }
+            catch (Exception exception)
+            {
+                this.logger.Log(new ErrorEvent(exception));
             }
         }
     }

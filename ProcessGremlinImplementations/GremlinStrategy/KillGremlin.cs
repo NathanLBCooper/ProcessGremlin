@@ -16,10 +16,17 @@ namespace ProcessGremlinImplementations
             this.gremlin = new SimpleProcessGremlin(
                 processes =>
                 {
-                    foreach (var process in processes)
+                    try
                     {
-                        process.Kill();
-                        this.logger.Log(new ProcessKilledEvent(process));
+                        foreach (var process in processes)
+                        {
+                            process.Kill();
+                            this.logger.Log(new ProcessKilledEvent(process));
+                        }
+                    }
+                    catch (Exception exception)
+                    {
+                        this.logger.Log(new ErrorEvent(exception));
                     }
                 }, processFinder);
         }
