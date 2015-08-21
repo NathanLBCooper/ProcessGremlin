@@ -13,10 +13,13 @@ namespace ProcessGremlinImplementations.Logging.Events
         }
 
         public FailureEvent(Exception exception)
+            : this(exception.ToString())
         {
-            this.Detail = exception.ToString();
-            this.Level = LogLevel.Fatal;
-            this.Name = "Failure";
+        }
+
+        public FailureEvent(string message, Exception exception)
+            : this(string.Format("Message: {0} Exception: {1}", message, exception.ToString()))
+        {
         }
     }
 }

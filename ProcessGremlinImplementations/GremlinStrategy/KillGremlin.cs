@@ -29,6 +29,7 @@ namespace ProcessGremlinImplementations.GremlinStrategy
                     {
                         this.logger.Log(new ErrorEvent(exception));
                     }
+                    this.logger.Log(new IntervalEndingEvent("Process Kill Task"));
                 }, processFinder);
         }
 

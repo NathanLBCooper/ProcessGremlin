@@ -24,7 +24,7 @@ namespace ProcessGremlinApp
                 {
                     var killOptions = (KillBusySubOptions) this.InvokedVerbInstance;
                     var finder = new BusyFinder(new NameBasedFinder(killOptions.ProcessName),
-                        killOptions.CpuBusyThreshold);
+                        killOptions.CpuBusyThreshold, logger);
                     gremlin = new KillGremlin(
                         killOptions.NumberToKill.HasValue
                             ? (IProcessFinder) new LimitedNumberFinder(finder, killOptions.NumberToKill.Value)
