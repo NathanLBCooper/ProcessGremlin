@@ -1,35 +1,45 @@
-using ProcessGremlinImplementations;
+using ProcessGremlinImplementations.Finders;
+using ProcessGremlinImplementations.GremlinStrategy;
 using ProcessGremlinImplementations.Logging;
-
 using ProcessGremlins;
 
 namespace ProcessGremlinApp
 {
     public class Arguments
     {
-        public string InvokedVerb { get; private set; }
-        public object InvokedVerbInstance { get; private set; }
-
         public Arguments(string invokedVerb, object invokedVerbInstance)
         {
             this.InvokedVerb = invokedVerb;
             this.InvokedVerbInstance = invokedVerbInstance;
         }
 
-        public bool TryBuildGremlin(ProcessFinderBuilder finderBuilder, IEventLogger logger, out IGremlin gremlin)
+        public string InvokedVerb { get; private set; }
+        public object InvokedVerbInstance { get; private set; }
+
+        public bool TryBuildGremlin(IEventLogger logger, out IGremlin gremlin)
         {
             switch (this.InvokedVerb)
             {
                 case Options.KillBusyVerbStr:
                 {
-                    var killOptions = (KillBusySubOptions)this.InvokedVerbInstance;
-                    gremlin = new KillBusyGremlin(finderBuilder.GetNameBasedFinder(killOptions.ProcessName), killOptions.CpuBusyThreshold, logger);
+                    var killOptions = (KillBusySubOptions) this.InvokedVerbInstance;
+                    var finder = new BusyFinder(new NameBasedFinder(killOptions.ProcessName),
+                        killOptions.CpuBusyThreshold);
+                    gremlin = new KillGremlin(
+                        killOptions.NumberToKill.HasValue
+                            ? (IProcessFinder) new LimitedNumberFinder(finder, killOptions.NumberToKill.Value)
+                            : finder, logger);
                     return true;
                 }
                 case Options.KillStr:
                 {
-                    var killOptions = (CommonOptions)this.InvokedVerbInstance;
-                    gremlin = new KillGremlin(finderBuilder.GetNameBasedFinder(killOptions.ProcessName), logger);
+                    var killOptions = (CommonOptions) this.InvokedVerbInstance;
+                    var finder = new NameBasedFinder(killOptions.ProcessName);
+                    gremlin =
+                        new KillGremlin(
+                            killOptions.NumberToKill.HasValue
+                                ? (IProcessFinder) new LimitedNumberFinder(finder, killOptions.NumberToKill.Value)
+                                : finder, logger);
                     return true;
                 }
             }
@@ -40,7 +50,7 @@ namespace ProcessGremlinApp
 
         public int GetTimerIntervalMs()
         {
-            return ((CommonOptions)this.InvokedVerbInstance).TimerIntervalMs;
+            return ((CommonOptions) this.InvokedVerbInstance).TimerIntervalMs;
         }
     }
 }

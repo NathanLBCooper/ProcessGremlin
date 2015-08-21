@@ -1,10 +1,9 @@
 using System;
-
 using ProcessGremlinImplementations.Logging;
-
+using ProcessGremlinImplementations.Logging.Events;
 using ProcessGremlins;
 
-namespace ProcessGremlinImplementations
+namespace ProcessGremlinImplementations.GremlinStrategy
 {
     public class KillGremlin : IGremlin
     {
@@ -13,9 +12,11 @@ namespace ProcessGremlinImplementations
 
         public KillGremlin(IProcessFinder processFinder, IEventLogger logger)
         {
+            this.logger = logger;
             this.gremlin = new SimpleProcessGremlin(
                 processes =>
                 {
+                    this.logger.Log(new IntervalStartingEvent("Process Kill Task"));
                     try
                     {
                         foreach (var process in processes)

@@ -8,7 +8,7 @@ namespace ProcessGremlinImplementations.Logging
 
         public void Log(IEvent evt)
         {
-            Logger.Log(evt.Level, string.Format("{0} : {1} : {2}", evt.Time, evt.Name, evt.Detail));
+            EventLogger.Logger.Log(evt.Level, string.Format("{0} : {1} : {2}", evt.Time, evt.Name, evt.Detail));
         }
     }
 }

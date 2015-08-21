@@ -1,8 +1,7 @@
 ﻿using System;
-using ProcessGremlins;
-
-using ProcessGremlinImplementations;
 using ProcessGremlinImplementations.Logging;
+using ProcessGremlinImplementations.Logging.Events;
+using ProcessGremlins;
 
 namespace ProcessGremlinApp
 {
@@ -10,26 +9,25 @@ namespace ProcessGremlinApp
     {
         private static readonly IEventLogger Logger = new EventLogger();
 
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
-            Logger.Log(new ApplicationStartedEvent());
-            AppDomain.CurrentDomain.ProcessExit += new EventHandler(CurrentDomain_ProcessExit);
+            Program.Logger.Log(new ApplicationStartedEvent());
+            AppDomain.CurrentDomain.ProcessExit += Program.CurrentDomain_ProcessExit;
 
-            var finderBuilder = new ProcessFinderBuilder();
             var timerBuilder = new GremlinTimerBuilder();
 
             var parser = new ArgumentParser();
             Arguments arguments;
             if (!parser.TryParse(args, out arguments))
             {
-                Logger.Log(new FailureEvent("Arguments do not parse"));
+                Program.Logger.Log(new FailureEvent("Arguments do not parse"));
                 return;
             }
 
             IGremlin gremlin;
-            if (!arguments.TryBuildGremlin(finderBuilder, Logger, out gremlin))
+            if (!arguments.TryBuildGremlin(Program.Logger, out gremlin))
             {
-                Logger.Log(new FailureEvent("Arguments do not parse"));
+                Program.Logger.Log(new FailureEvent("Arguments do not parse"));
                 return;
             }
 
@@ -44,9 +42,9 @@ namespace ProcessGremlinApp
             }
         }
 
-        static void CurrentDomain_ProcessExit(object sender, EventArgs e)
+        private static void CurrentDomain_ProcessExit(object sender, EventArgs e)
         {
-            Logger.Log(new ApplicationEndingEvent());
+            Program.Logger.Log(new ApplicationEndingEvent());
         }
     }
 }

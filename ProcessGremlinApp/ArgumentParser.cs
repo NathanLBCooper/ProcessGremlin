@@ -1,3 +1,5 @@
+using CommandLine;
+
 namespace ProcessGremlinApp
 {
     public class ArgumentParser
@@ -8,7 +10,7 @@ namespace ProcessGremlinApp
             object invokedVerbInstance = null;
 
             var options = new Options();
-            if (CommandLine.Parser.Default.ParseArguments(
+            if (Parser.Default.ParseArguments(
                 args,
                 options,
                 (verb, subOptions) =>

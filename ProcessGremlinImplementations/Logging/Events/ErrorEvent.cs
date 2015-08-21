@@ -1,8 +1,7 @@
 using System;
-
 using NLog;
 
-namespace ProcessGremlinImplementations.Logging
+namespace ProcessGremlinImplementations.Logging.Events
 {
     public sealed class ErrorEvent : Event
     {

@@ -1,15 +1,14 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-
 using ProcessGremlins;
 
-namespace ProcessGremlinImplementations
+namespace ProcessGremlinImplementations.GremlinStrategy
 {
     public class SimpleProcessGremlin : IGremlin
     {
-        private readonly Action<IEnumerable<Process>> gremlinAction;
         private readonly IProcessFinder finder;
+        private readonly Action<IEnumerable<Process>> gremlinAction;
 
         public SimpleProcessGremlin(Action<IEnumerable<Process>> action, IProcessFinder processFinder)
         {
