@@ -9,6 +9,7 @@ namespace ProcessGremlinImplementations.GremlinStrategy
     {
         private readonly SimpleProcessGremlin gremlin;
         private readonly IEventLogger logger;
+        private static readonly Type Type = typeof (KillGremlin);
 
         public KillGremlin(IProcessFinder processFinder, IEventLogger logger)
         {
@@ -16,20 +17,20 @@ namespace ProcessGremlinImplementations.GremlinStrategy
             this.gremlin = new SimpleProcessGremlin(
                 processes =>
                 {
-                    this.logger.Log(new IntervalStartingEvent("Process Kill Task"));
+                    this.logger.Log(new IntervalStartingEvent("Process Kill Task", KillGremlin.Type));
                     try
                     {
                         foreach (var process in processes)
                         {
                             process.Kill();
-                            this.logger.Log(new ProcessKilledEvent(process));
+                            this.logger.Log(new ProcessKilledEvent(process, KillGremlin.Type));
                         }
                     }
                     catch (Exception exception)
                     {
-                        this.logger.Log(new ErrorEvent(exception));
+                        this.logger.Log(new ErrorEvent(exception, Type));
                     }
-                    this.logger.Log(new IntervalEndingEvent("Process Kill Task"));
+                    this.logger.Log(new IntervalEndingEvent("Process Kill Task", KillGremlin.Type));
                 }, processFinder);
         }
 

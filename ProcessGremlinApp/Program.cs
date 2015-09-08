@@ -14,10 +14,11 @@ namespace ProcessGremlinApp
     public class Program
     {
         private static readonly IEventLogger Logger = new EventLogger();
+        private static readonly Type Type = typeof (Program);
 
         private static void Main(string[] args)
         {
-            Program.Logger.Log(new ApplicationStartedEvent());
+            Program.Logger.Log(new ApplicationStartedEvent(Program.Type));
             AppDomain.CurrentDomain.ProcessExit += Program.CurrentDomain_ProcessExit;
             AppDomain.CurrentDomain.UnhandledException += Program.CurrentDomain_UnhandledException;
 
@@ -27,14 +28,14 @@ namespace ProcessGremlinApp
             Arguments arguments;
             if (!parser.TryParse(args, out arguments))
             {
-                Program.Logger.Log(new FailureEvent("Arguments do not parse"));
+                Program.Logger.Log(new FailureEvent("Arguments do not parse", Program.Type));
                 return;
             }
 
             IGremlin gremlin;
             if (!arguments.TryBuildGremlin(Program.Logger, out gremlin))
             {
-                Program.Logger.Log(new FailureEvent("Arguments do not parse"));
+                Program.Logger.Log(new FailureEvent("Arguments do not parse", Program.Type));
                 return;
             }
 
@@ -51,7 +52,7 @@ namespace ProcessGremlinApp
 
         private static void CurrentDomain_ProcessExit(object sender, EventArgs e)
         {
-            Program.Logger.Log(new ApplicationEndingEvent());
+            Program.Logger.Log(new ApplicationEndingEvent(Program.Type));
         }
 
         private static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs args)
@@ -59,7 +60,7 @@ namespace ProcessGremlinApp
             Exception exception = (Exception)args.ExceptionObject;
             Program.Logger.Log(
                 new FailureEvent(string.Format("Unhandled Exception. Runtime terminating: {0}", args.IsTerminating),
-                    exception));
+                    exception, Program.Type));
         }
     }
 }

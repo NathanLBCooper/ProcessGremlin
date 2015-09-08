@@ -15,6 +15,7 @@ namespace ProcessGremlinImplementations.Finders
         private readonly int busyThreshold;
         private readonly IProcessFinder finder;
         private readonly IEventLogger logger;
+        private static readonly Type Type = typeof(BusyFinder);
 
         // busyThreshold in % of core being used, ie up to 400 on a 4-core
         public BusyFinder(IProcessFinder finder, int busyThreshold, IEventLogger logger)
@@ -34,12 +35,12 @@ namespace ProcessGremlinImplementations.Finders
         private int GetCpuUsage(Process process)
         {
             var cpuCounter = new PerformanceCounter("Process", "% Processor Time", this.GetInstanceName(process), true);
-            this.logger.Log(new IntervalStartingEvent("Beginning to measure CPU usage"));
+            this.logger.Log(new IntervalStartingEvent("Beginning to measure CPU usage", BusyFinder.Type));
             cpuCounter.NextValue();
             Thread.Sleep(BusyFinder.SampleTime);
             var usage = (int)cpuCounter.NextValue();
-            this.logger.Log(new MeasuredCpuEvent(process, usage, BusyFinder.SampleTime));
-            this.logger.Log(new IntervalStartingEvent("Ending measure of CPU usage"));
+            this.logger.Log(new MeasuredCpuEvent(process, usage, BusyFinder.SampleTime, Type));
+            this.logger.Log(new IntervalStartingEvent("Ending measure of CPU usage", BusyFinder.Type));
             return usage;
         }
 
@@ -65,7 +66,7 @@ namespace ProcessGremlinImplementations.Finders
                     catch(Exception exception)
                     {
                         // Suppress errors from instances without counters
-                        this.logger.Log(new WarningEvent(exception));
+                        this.logger.Log(new WarningEvent(exception, BusyFinder.Type));
                     }
                 }
             }

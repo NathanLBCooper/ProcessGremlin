@@ -5,14 +5,17 @@ namespace ProcessGremlinImplementations.Logging
 {
     public abstract class Event : IEvent
     {
-        protected Event()
+        protected Event(Type eventSource)
         {
-            this.Time = DateTime.UtcNow;
+            Time = DateTime.UtcNow;
+            EventSource = eventSource.Name;
         }
 
         public string Name { get; protected set; }
         public DateTime Time { get; private set; }
         public string Detail { get; protected set; }
         public LogLevel Level { get; protected set; }
+
+        public string EventSource { get; private set; }
     }
 }

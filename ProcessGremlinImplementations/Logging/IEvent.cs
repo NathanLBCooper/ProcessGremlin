@@ -9,5 +9,6 @@ namespace ProcessGremlinImplementations.Logging
         DateTime Time { get; }
         string Detail { get; }
         LogLevel Level { get; }
+        string EventSource { get; }
     }
 }
