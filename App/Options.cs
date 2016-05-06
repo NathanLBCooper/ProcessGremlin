@@ -1,7 +1,7 @@
 ﻿using CommandLine;
 using CommandLine.Text;
 
-namespace ProcessGremlinApp
+namespace ProcessGremlin.App
 {
     public class Options
     {

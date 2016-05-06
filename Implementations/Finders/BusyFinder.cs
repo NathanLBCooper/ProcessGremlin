@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading;
-using Logging;
-using Logging.Events;
-using ProcessGremlin.ProcessGremlin;
+using ProcessGremlin.Core.Processes;
+using ProcessGremlin.Logging;
+using ProcessGremlin.Logging.Events;
 
-namespace ProcessGremlinImplementations.Finders
+namespace ProcessGremlin.Implementations.Finders
 {
     public class BusyFinder : IProcessFinder
     {

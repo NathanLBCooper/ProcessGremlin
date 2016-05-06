@@ -2,7 +2,7 @@ using System;
 using System.Diagnostics;
 using NLog;
 
-namespace Logging.Events
+namespace ProcessGremlin.Logging.Events
 {
     public sealed class ProcessKilledEvent : Event
     {

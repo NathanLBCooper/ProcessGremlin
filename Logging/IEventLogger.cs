@@ -1,4 +1,4 @@
-﻿namespace Logging
+﻿namespace ProcessGremlin.Logging
 {
     public interface IEventLogger
     {

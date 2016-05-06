@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using ProcessGremlin.ProcessGremlin;
+using ProcessGremlin.Core.Processes;
 
-namespace ProcessGremlinImplementations.Finders
+namespace ProcessGremlin.Implementations.Finders
 {
     public class LimitedNumberFinder : IProcessFinder
     {

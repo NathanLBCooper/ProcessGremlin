@@ -1,9 +1,9 @@
 ﻿using System;
-using Logging;
-using Logging.Events;
-using ProcessGremlin.GremlinCore;
+using ProcessGremlin.Core.Timers;
+using ProcessGremlin.Logging;
+using ProcessGremlin.Logging.Events;
 
-namespace ProcessGremlinApp
+namespace ProcessGremlin.App
 {
     /*
      * Example calls:

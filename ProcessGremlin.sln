@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProcessGremlin", "ProcessGremlin\ProcessGremlin.csproj", "{4FB846B6-B7DA-44D3-921A-865580B56959}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{4FB846B6-B7DA-44D3-921A-865580B56959}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProcessGremlinApp", "ProcessGremlinApp\ProcessGremlinApp.csproj", "{15F60649-0EBA-443A-A3F5-C0271173A088}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App", "App\App.csproj", "{15F60649-0EBA-443A-A3F5-C0271173A088}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProcessGremlinImplementations", "ProcessGremlinImplementations\ProcessGremlinImplementations.csproj", "{54F0A358-8F2B-49C3-B618-EF81C9126017}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Implementations", "Implementations\Implementations.csproj", "{54F0A358-8F2B-49C3-B618-EF81C9126017}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logging", "Logging\Logging.csproj", "{9BF15B55-D1C2-4BC2-A038-8CAC363D2EBD}"
 EndProject

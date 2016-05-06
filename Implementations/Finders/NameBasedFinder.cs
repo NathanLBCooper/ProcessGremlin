@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
-using ProcessGremlin.ProcessGremlin;
+using ProcessGremlin.Core.Processes;
 
-namespace ProcessGremlinImplementations.Finders
+namespace ProcessGremlin.Implementations.Finders
 {
     public class NameBasedFinder : IProcessFinder
     {

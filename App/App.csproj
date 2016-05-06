@@ -72,13 +72,13 @@
       <Project>{9bf15b55-d1c2-4bc2-a038-8cac363d2ebd}</Project>
       <Name>Logging</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ProcessGremlinImplementations\ProcessGremlinImplementations.csproj">
+    <ProjectReference Include="..\Implementations\Implementations.csproj">
       <Project>{54f0a358-8f2b-49c3-b618-ef81c9126017}</Project>
-      <Name>ProcessGremlinImplementations</Name>
+      <Name>Implementations</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ProcessGremlin\ProcessGremlin.csproj">
+    <ProjectReference Include="..\Core\Core.csproj">
       <Project>{4fb846b6-b7da-44d3-921a-865580b56959}</Project>
-      <Name>ProcessGremlin</Name>
+      <Name>Core</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

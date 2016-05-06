@@ -1,6 +1,6 @@
 using CommandLine;
 
-namespace ProcessGremlinApp
+namespace ProcessGremlin.App
 {
     public class ArgumentParser
     {

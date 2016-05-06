@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ProcessGremlin.GremlinCore
+namespace ProcessGremlin.Core.Timers
 {
     public class GremlinTimerBuilder
     {

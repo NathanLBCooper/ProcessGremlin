@@ -1,10 +1,10 @@
 using System;
-using Logging;
-using ProcessGremlin.ProcessGremlin;
-using ProcessGremlinImplementations.Finders;
-using ProcessGremlinImplementations.GremlinStrategy;
+using ProcessGremlin.Core.Processes;
+using ProcessGremlin.Implementations.Finders;
+using ProcessGremlin.Implementations.GremlinStrategy;
+using ProcessGremlin.Logging;
 
-namespace ProcessGremlinApp
+namespace ProcessGremlin.App
 {
     public class Arguments
     {

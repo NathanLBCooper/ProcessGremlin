@@ -1,7 +1,7 @@
 using System;
 using NLog;
 
-namespace Logging.Events
+namespace ProcessGremlin.Logging.Events
 {
     public sealed class ApplicationEndingEvent : Event
     {

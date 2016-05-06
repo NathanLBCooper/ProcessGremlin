@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using Logging;
-using ProcessGremlin.ProcessGremlin;
+using ProcessGremlin.Core.Processes;
+using ProcessGremlin.Logging;
 
-namespace ProcessGremlinImplementations.Finders
+namespace ProcessGremlin.Implementations.Finders
 {
     public class EvenLoadFinder : IProcessFinder
     {

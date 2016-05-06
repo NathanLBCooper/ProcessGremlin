@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 
-namespace ProcessGremlin.ProcessGremlin
+namespace ProcessGremlin.Core.Processes
 {
     public class ProcessFinder : IProcessFinder
     {

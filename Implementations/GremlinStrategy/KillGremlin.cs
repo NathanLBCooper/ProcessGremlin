@@ -1,9 +1,9 @@
 using System;
-using Logging;
-using Logging.Events;
-using ProcessGremlin.ProcessGremlin;
+using ProcessGremlin.Core.Processes;
+using ProcessGremlin.Logging;
+using ProcessGremlin.Logging.Events;
 
-namespace ProcessGremlinImplementations.GremlinStrategy
+namespace ProcessGremlin.Implementations.GremlinStrategy
 {
     public class KillGremlin
     {

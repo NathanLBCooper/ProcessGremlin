@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using ProcessGremlin.ProcessGremlin;
+using ProcessGremlin.Core.Processes;
 
-namespace ProcessGremlinImplementations.GremlinStrategy
+namespace ProcessGremlin.Implementations.GremlinStrategy
 {
     public class SimpleProcessGremlin
     {
