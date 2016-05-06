@@ -1,8 +1,8 @@
 using System;
+using Logging;
 using ProcessGremlin.ProcessGremlin;
 using ProcessGremlinImplementations.Finders;
 using ProcessGremlinImplementations.GremlinStrategy;
-using ProcessGremlinImplementations.Logging;
 
 namespace ProcessGremlinApp
 {

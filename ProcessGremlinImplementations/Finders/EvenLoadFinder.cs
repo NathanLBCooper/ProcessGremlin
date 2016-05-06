@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using Logging;
 using ProcessGremlin.ProcessGremlin;
-using ProcessGremlinImplementations.Logging;
 
 namespace ProcessGremlinImplementations.Finders
 {

@@ -1,7 +1,7 @@
 using System;
 using NLog;
 
-namespace ProcessGremlinImplementations.Logging
+namespace Logging
 {
     public interface IEvent
     {

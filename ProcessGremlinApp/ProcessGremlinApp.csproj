@@ -68,6 +68,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Logging\Logging.csproj">
+      <Project>{9bf15b55-d1c2-4bc2-a038-8cac363d2ebd}</Project>
+      <Name>Logging</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ProcessGremlinImplementations\ProcessGremlinImplementations.csproj">
       <Project>{54f0a358-8f2b-49c3-b618-ef81c9126017}</Project>
       <Name>ProcessGremlinImplementations</Name>

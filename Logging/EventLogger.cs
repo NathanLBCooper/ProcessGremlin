@@ -1,7 +1,7 @@
 ﻿using System.Collections.Concurrent;
 using NLog;
 
-namespace ProcessGremlinImplementations.Logging
+namespace Logging
 {
     public class EventLogger : IEventLogger
     {

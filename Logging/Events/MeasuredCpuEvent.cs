@@ -2,7 +2,7 @@ using System;
 using System.Diagnostics;
 using NLog;
 
-namespace ProcessGremlinImplementations.Logging.Events
+namespace Logging.Events
 {
     public sealed class MeasuredCpuEvent : Event
     {
