@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Timers;
 
-namespace ProcessGremlins
+namespace ProcessGremlin.GremlinCore
 {
     public class GenericTimer : IDisposable
     {

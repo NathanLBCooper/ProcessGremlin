@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using ProcessGremlins;
+using ProcessGremlin.ProcessGremlin;
 
 namespace ProcessGremlinImplementations.GremlinStrategy
 {

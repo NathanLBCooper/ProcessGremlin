@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading;
+using ProcessGremlin.ProcessGremlin;
 using ProcessGremlinImplementations.Logging;
 using ProcessGremlinImplementations.Logging.Events;
-using ProcessGremlins;
 
 namespace ProcessGremlinImplementations.Finders
 {

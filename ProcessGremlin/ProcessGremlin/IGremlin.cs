@@ -1,4 +1,4 @@
-namespace ProcessGremlins
+namespace ProcessGremlin.ProcessGremlin
 {
     public interface IGremlin
     {

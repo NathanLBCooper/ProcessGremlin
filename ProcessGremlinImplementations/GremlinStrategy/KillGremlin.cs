@@ -1,7 +1,7 @@
 using System;
+using ProcessGremlin.ProcessGremlin;
 using ProcessGremlinImplementations.Logging;
 using ProcessGremlinImplementations.Logging.Events;
-using ProcessGremlins;
 
 namespace ProcessGremlinImplementations.GremlinStrategy
 {

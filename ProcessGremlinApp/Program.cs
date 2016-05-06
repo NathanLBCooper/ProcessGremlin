@@ -1,7 +1,8 @@
 ﻿using System;
+using ProcessGremlin.GremlinCore;
+using ProcessGremlin.ProcessGremlin;
 using ProcessGremlinImplementations.Logging;
 using ProcessGremlinImplementations.Logging.Events;
-using ProcessGremlins;
 
 namespace ProcessGremlinApp
 {
