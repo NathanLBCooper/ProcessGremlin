@@ -33,7 +33,7 @@ namespace ProcessGremlinApp
                 return;
             }
 
-            IGremlin gremlin;
+            Action gremlin;
             if (!arguments.TryBuildGremlin(Program.Logger, out gremlin))
             {
                 Program.Logger.Log(new FailureEvent("Arguments do not parse", Program.Type));

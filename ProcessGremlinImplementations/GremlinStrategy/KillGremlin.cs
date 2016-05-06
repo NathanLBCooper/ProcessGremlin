@@ -5,7 +5,7 @@ using ProcessGremlinImplementations.Logging.Events;
 
 namespace ProcessGremlinImplementations.GremlinStrategy
 {
-    public class KillGremlin : IGremlin
+    public class KillGremlin
     {
         private readonly SimpleProcessGremlin _gremlin;
         private readonly IEventLogger _logger;

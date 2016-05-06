@@ -5,7 +5,7 @@ using ProcessGremlin.ProcessGremlin;
 
 namespace ProcessGremlinImplementations.GremlinStrategy
 {
-    public class SimpleProcessGremlin : IGremlin
+    public class SimpleProcessGremlin
     {
         private readonly IProcessFinder _finder;
         private readonly Action<IEnumerable<Process>> _gremlinAction;

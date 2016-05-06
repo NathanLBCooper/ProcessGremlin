@@ -1,3 +1,4 @@
+using System;
 using ProcessGremlin.ProcessGremlin;
 using ProcessGremlinImplementations.Finders;
 using ProcessGremlinImplementations.GremlinStrategy;
@@ -16,7 +17,7 @@ namespace ProcessGremlinApp
             InvokedVerbInstance = invokedVerbInstance;
         }
 
-        public bool TryBuildGremlin(IEventLogger logger, out IGremlin gremlin)
+        public bool TryBuildGremlin(IEventLogger logger, out Action gremlin)
         {
             switch (InvokedVerb)
             {
@@ -28,7 +29,7 @@ namespace ProcessGremlinApp
                     gremlin = new KillGremlin(
                         killOptions.NumberToKill.HasValue
                             ? (IProcessFinder) new LimitedNumberFinder(finder, killOptions.NumberToKill.Value)
-                            : finder, logger);
+                            : finder, logger).Meddle;
                     return true;
                 }
                 case Options.KillStr:
@@ -39,7 +40,7 @@ namespace ProcessGremlinApp
                         new KillGremlin(
                             killOptions.NumberToKill.HasValue
                                 ? (IProcessFinder) new LimitedNumberFinder(finder, killOptions.NumberToKill.Value)
-                                : finder, logger);
+                                : finder, logger).Meddle;
                     return true;
                 }
             }

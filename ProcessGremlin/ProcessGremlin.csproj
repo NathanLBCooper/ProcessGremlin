@@ -44,7 +44,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ProcessGremlin\IGremlin.cs" />
     <Compile Include="GremlinCore\GenericTimer.cs" />
     <Compile Include="GremlinCore\GremlinTimerBuilder.cs" />
     <Compile Include="ProcessGremlin\IProcessFinder.cs" />
