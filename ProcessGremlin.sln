@@ -1,13 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.40629.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProcessGremlin", "ProcessGremlin\ProcessGremlin.csproj", "{4FB846B6-B7DA-44D3-921A-865580B56959}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProcessGremlinApp", "ProcessGremlinApp\ProcessGremlinApp.csproj", "{15F60649-0EBA-443A-A3F5-C0271173A088}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProcessGremlinImplementations", "ProcessGremlinImplementations\ProcessGremlinImplementations.csproj", "{54F0A358-8F2B-49C3-B618-EF81C9126017}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProcessGremlin.Test", "ProcessGremlin.Test\ProcessGremlin.Test.csproj", "{B7A10D55-30AE-42C9-8979-C83AE3273DED}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{54F0A358-8F2B-49C3-B618-EF81C9126017}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{54F0A358-8F2B-49C3-B618-EF81C9126017}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{54F0A358-8F2B-49C3-B618-EF81C9126017}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B7A10D55-30AE-42C9-8979-C83AE3273DED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7A10D55-30AE-42C9-8979-C83AE3273DED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7A10D55-30AE-42C9-8979-C83AE3273DED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7A10D55-30AE-42C9-8979-C83AE3273DED}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

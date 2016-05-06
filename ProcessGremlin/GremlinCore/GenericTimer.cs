@@ -6,13 +6,13 @@ namespace ProcessGremlins
     public class GenericTimer : IDisposable
     {
         private readonly Action strategy;
-        private readonly Timer timer;
+        private readonly ITimer timer;
 
-        public GenericTimer(Action strategy, double intervalMs)
+        public GenericTimer(Action strategy, double intervalMs, ITimerFactory timerFactory)
         {
             this.strategy = strategy;
 
-            this.timer = new Timer(intervalMs) {AutoReset = false};
+            this.timer = timerFactory.NewTimer(intervalMs, false);
             this.timer.Elapsed += this.OnIntervalElapsed;
         }
 
@@ -40,7 +40,9 @@ namespace ProcessGremlins
         private void OnIntervalElapsed(object sender, ElapsedEventArgs e)
         {
             this.Run();
-            ((Timer) sender).Start();
+
+            // Manually start (rather than use autoreset) as Run may be slow
+            timer.Start();
         }
     }
 }
