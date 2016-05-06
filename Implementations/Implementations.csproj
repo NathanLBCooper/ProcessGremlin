@@ -43,9 +43,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Finders\BusyFinder.cs" />
-    <Compile Include="Finders\EvenLoadFinder.cs" />
-    <Compile Include="Finders\LimitedNumberFinder.cs" />
+    <Compile Include="CompositeFinders\BusyFinder.cs" />
+    <Compile Include="CompositeFinders\EvenLoadFinder.cs" />
+    <Compile Include="CompositeFinders\FilteredFinder.cs" />
+    <Compile Include="CompositeFinders\LimitedNumberFinder.cs" />
     <Compile Include="Finders\NameBasedFinder.cs" />
     <Compile Include="GremlinStrategy\SimpleProcessGremlin.cs" />
     <Compile Include="GremlinStrategy\KillGremlin.cs" />

@@ -6,6 +6,9 @@ using ProcessGremlin.Logging;
 
 namespace ProcessGremlin.Implementations.Finders
 {
+    /// <summary>
+    /// Cycles through other finders
+    /// </summary>
     public class EvenLoadFinder : IProcessFinder
     {
         private readonly IEnumerator<IProcessFinder> _processFinderEnumerator;

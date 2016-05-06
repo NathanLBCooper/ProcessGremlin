@@ -9,6 +9,9 @@ using ProcessGremlin.Logging.Events;
 
 namespace ProcessGremlin.Implementations.Finders
 {
+    /// <summary>
+    /// Find only busy processes that match the supplied finder
+    /// </summary>
     public class BusyFinder : IProcessFinder
     {
         private const int SampleTime = 1000;
@@ -72,7 +75,6 @@ namespace ProcessGremlin.Implementations.Finders
             }
 
             if (instanceName == null) throw new Exception("Process Instance PerformanceCounter not found for this Pid");
-            ;
 
             return instanceName;
         }
