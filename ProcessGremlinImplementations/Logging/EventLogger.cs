@@ -15,7 +15,7 @@ namespace ProcessGremlinImplementations.Logging
 
         private static Logger GetLogger(IEvent evt)
         {
-            return Loggers.GetOrAdd(evt.EventSource, (evtSrc) => LogManager.GetLogger(evtSrc));
+            return Loggers.GetOrAdd(evt.EventSource, LogManager.GetLogger);
         }
     }
 }

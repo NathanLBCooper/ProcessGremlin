@@ -8,9 +8,9 @@ namespace ProcessGremlinImplementations.Logging.Events
         public ApplicationStartedEvent(Type source)
             : base(source)
         {
-            this.Detail = "Application Starting";
-            this.Level = LogLevel.Info;
-            this.Name = "Application Starting";
+            Detail = "Application Starting";
+            Level = LogLevel.Info;
+            Name = "Application Starting";
         }
     }
 }

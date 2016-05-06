@@ -8,9 +8,9 @@ namespace ProcessGremlinImplementations.Logging.Events
         public IntervalEndingEvent(string description, Type source)
             : base(source)
         {
-            this.Detail = string.Format("Action ending: {0}", description);
-            this.Level = LogLevel.Debug;
-            this.Name = "Interval Ending";
+            Detail = string.Format("Action ending: {0}", description);
+            Level = LogLevel.Debug;
+            Name = "Interval Ending";
         }
     }
 }

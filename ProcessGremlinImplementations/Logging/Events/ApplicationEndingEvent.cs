@@ -8,9 +8,9 @@ namespace ProcessGremlinImplementations.Logging.Events
         public ApplicationEndingEvent(Type source)
             : base(source)
         {
-            this.Detail = "Application Ending";
-            this.Level = LogLevel.Info;
-            this.Name = "Application Ending";
+            Detail = "Application Ending";
+            Level = LogLevel.Info;
+            Name = "Application Ending";
         }
     }
 }

@@ -6,11 +6,11 @@ namespace ProcessGremlinImplementations.Finders
 {
     public class NameBasedFinder : IProcessFinder
     {
-        private readonly IEnumerable<string> names;
+        private readonly IEnumerable<string> _names;
 
         public NameBasedFinder(IEnumerable<string> names)
         {
-            this.names = names;
+            _names = names;
         }
 
         public NameBasedFinder(string name)
@@ -21,7 +21,7 @@ namespace ProcessGremlinImplementations.Finders
         public IEnumerable<Process> Find()
         {
             var processes = new List<Process>();
-            foreach (var name in this.names)
+            foreach (var name in _names)
             {
                 processes.AddRange(Process.GetProcessesByName(name));
             }

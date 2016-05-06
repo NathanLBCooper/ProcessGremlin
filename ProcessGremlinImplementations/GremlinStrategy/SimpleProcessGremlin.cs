@@ -7,18 +7,18 @@ namespace ProcessGremlinImplementations.GremlinStrategy
 {
     public class SimpleProcessGremlin : IGremlin
     {
-        private readonly IProcessFinder finder;
-        private readonly Action<IEnumerable<Process>> gremlinAction;
+        private readonly IProcessFinder _finder;
+        private readonly Action<IEnumerable<Process>> _gremlinAction;
 
         public SimpleProcessGremlin(Action<IEnumerable<Process>> action, IProcessFinder processFinder)
         {
-            this.gremlinAction = action;
-            this.finder = processFinder;
+            _gremlinAction = action;
+            _finder = processFinder;
         }
 
         public void Meddle()
         {
-            this.gremlinAction.Invoke(this.finder.Find());
+            _gremlinAction.Invoke(_finder.Find());
         }
     }
 }

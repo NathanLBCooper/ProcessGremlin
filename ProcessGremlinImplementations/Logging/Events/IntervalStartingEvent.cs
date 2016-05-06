@@ -8,9 +8,9 @@ namespace ProcessGremlinImplementations.Logging.Events
         public IntervalStartingEvent(string description, Type source)
             : base(source)
         {
-            this.Detail = string.Format("Action begining: {0}", description);
-            this.Level = LogLevel.Debug;
-            this.Name = "Interval Starting";
+            Detail = string.Format("Action begining: {0}", description);
+            Level = LogLevel.Debug;
+            Name = "Interval Starting";
         }
     }
 }

@@ -8,9 +8,9 @@ namespace ProcessGremlinImplementations.Logging.Events
         public ErrorEvent(string message, Type source)
             : base(source)
         {
-            this.Detail = message;
-            this.Level = LogLevel.Error;
-            this.Name = "Error";
+            Detail = message;
+            Level = LogLevel.Error;
+            Name = "Error";
         }
 
         public ErrorEvent(Exception exception, Type source)

@@ -5,41 +5,41 @@ namespace ProcessGremlin.GremlinCore
 {
     public class GenericTimer : IDisposable
     {
-        private readonly Action strategy;
-        private readonly Timer timer;
+        private readonly Action _strategy;
+        private readonly Timer _timer;
 
         public GenericTimer(Action strategy, double intervalMs)
         {
-            this.strategy = strategy;
+            _strategy = strategy;
 
-            this.timer = new Timer(intervalMs) {AutoReset = false};
-            this.timer.Elapsed += this.OnIntervalElapsed;
+            _timer = new Timer(intervalMs) {AutoReset = false};
+            _timer.Elapsed += this.OnIntervalElapsed;
         }
 
         public void Dispose()
         {
-            this.timer.Dispose();
+            _timer.Dispose();
         }
 
         public void Start()
         {
-            this.Run();
-            this.timer.Start();
+            Run();
+            _timer.Start();
         }
 
         public void Stop()
         {
-            this.timer.Stop();
+            _timer.Stop();
         }
 
         public void Run()
         {
-            this.strategy.Invoke();
+            _strategy.Invoke();
         }
 
         private void OnIntervalElapsed(object sender, ElapsedEventArgs e)
         {
-            this.Run();
+            Run();
             ((Timer) sender).Start();
         }
     }

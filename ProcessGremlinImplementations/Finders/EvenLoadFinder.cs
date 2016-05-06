@@ -8,26 +8,26 @@ namespace ProcessGremlinImplementations.Finders
 {
     public class EvenLoadFinder : IProcessFinder
     {
-        private readonly IEnumerator<IProcessFinder> processFinderEnumerator;
-        private readonly IEnumerable<IProcessFinder> processFinders;
+        private readonly IEnumerator<IProcessFinder> _processFinderEnumerator;
+        private readonly IEnumerable<IProcessFinder> _processFinders;
 
         public EvenLoadFinder(IEnumerable<IProcessFinder> processFinders, IEventLogger logger)
         {
-            this.processFinders = processFinders;
-            this.processFinderEnumerator = this.processFinders.GetEnumerator();
+            _processFinders = processFinders;
+            _processFinderEnumerator = _processFinders.GetEnumerator();
         }
 
         public IEnumerable<Process> Find()
         {
-            for (var i = 0; i < this.processFinders.Count(); i++)
+            for (var i = 0; i < _processFinders.Count(); i++)
             {
-                if (!this.processFinderEnumerator.MoveNext())
+                if (!_processFinderEnumerator.MoveNext())
                 {
-                    this.processFinderEnumerator.Reset();
-                    this.processFinderEnumerator.MoveNext();
+                    _processFinderEnumerator.Reset();
+                    _processFinderEnumerator.MoveNext();
                 }
 
-                var processesOfName = this.processFinderEnumerator.Current.Find().ToList();
+                var processesOfName = _processFinderEnumerator.Current.Find().ToList();
                 if (processesOfName.Count != 0)
                 {
                     return processesOfName.Take(1);

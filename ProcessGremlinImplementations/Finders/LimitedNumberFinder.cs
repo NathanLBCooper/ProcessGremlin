@@ -7,19 +7,19 @@ namespace ProcessGremlinImplementations.Finders
 {
     public class LimitedNumberFinder : IProcessFinder
     {
-        private readonly IProcessFinder finder;
-        private readonly int limit;
+        private readonly IProcessFinder _finder;
+        private readonly int _limit;
 
-        // Efficiency of implementation depends on IEnumerable<Process> returned by finder being lazy
+        // Efficiency of implementation depends on IEnumerable<Process> returned by _finder being lazy
         public LimitedNumberFinder(IProcessFinder finder, int limit)
         {
-            this.finder = finder;
-            this.limit = limit;
+            _finder = finder;
+            _limit = limit;
         }
 
         public IEnumerable<Process> Find()
         {
-            return this.finder.Find().Take(this.limit);
+            return this._finder.Find().Take(_limit);
         }
     }
 }

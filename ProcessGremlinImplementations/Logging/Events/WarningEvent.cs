@@ -8,9 +8,9 @@ namespace ProcessGremlinImplementations.Logging.Events
         public WarningEvent(string message, Type source)
             : base(source)
         {
-            this.Detail = message;
-            this.Level = LogLevel.Warn;
-            this.Name = "Warning";
+            Detail = message;
+            Level = LogLevel.Warn;
+            Name = "Warning";
         }
 
         public WarningEvent(Exception exception, Type source)

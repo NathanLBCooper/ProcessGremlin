@@ -7,21 +7,21 @@ namespace ProcessGremlin.ProcessGremlin
 {
     public class ProcessFinder : IProcessFinder
     {
-        private readonly Func<IEnumerable<Process>> finderFunc;
+        private readonly Func<IEnumerable<Process>> _finderFunc;
 
         public ProcessFinder(Func<IEnumerable<Process>> finderFunc)
         {
-            this.finderFunc = finderFunc;
+            _finderFunc = finderFunc;
         }
 
         public ProcessFinder(IEnumerable<IProcessFinder> finders)
         {
-            this.finderFunc = () => finders.SelectMany(finder => finder.Find());
+            _finderFunc = () => finders.SelectMany(finder => finder.Find());
         }
 
         public IEnumerable<Process> Find()
         {
-            return this.finderFunc.Invoke();
+            return _finderFunc.Invoke();
         }
     }
 }

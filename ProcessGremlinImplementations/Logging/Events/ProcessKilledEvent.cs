@@ -9,9 +9,9 @@ namespace ProcessGremlinImplementations.Logging.Events
         public ProcessKilledEvent(Process process, Type source)
             : base(source)
         {
-            this.Detail = string.Format("Process {0} with pid {1} was Killed", process.ProcessName, process.Id);
-            this.Level = LogLevel.Info;
-            this.Name = "Process Killed";
+            Detail = string.Format("Process {0} with pid {1} was Killed", process.ProcessName, process.Id);
+            Level = LogLevel.Info;
+            Name = "Process Killed";
         }
     }
 }

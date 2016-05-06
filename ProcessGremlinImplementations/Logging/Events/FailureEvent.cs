@@ -8,9 +8,9 @@ namespace ProcessGremlinImplementations.Logging.Events
         public FailureEvent(string message, Type source)
             : base(source)
         {
-            this.Detail = message;
-            this.Level = LogLevel.Fatal;
-            this.Name = "Failure";
+            Detail = message;
+            Level = LogLevel.Fatal;
+            Name = "Failure";
         }
 
         public FailureEvent(Exception exception, Type source)
@@ -19,7 +19,7 @@ namespace ProcessGremlinImplementations.Logging.Events
         }
 
         public FailureEvent(string message, Exception exception, Type source)
-            : this(string.Format("Message: {0} Exception: {1}", message, exception.ToString()), source)
+            : this(string.Format("Message: {0} Exception: {1}", message, exception), source)
         {
         }
     }

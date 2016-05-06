@@ -12,35 +12,35 @@ namespace ProcessGremlinImplementations.Finders
     public class BusyFinder : IProcessFinder
     {
         private const int SampleTime = 1000;
-        private readonly int busyThreshold;
-        private readonly IProcessFinder finder;
-        private readonly IEventLogger logger;
+        private readonly int _busyThreshold;
+        private readonly IProcessFinder _finder;
+        private readonly IEventLogger _logger;
         private static readonly Type Type = typeof(BusyFinder);
 
-        // busyThreshold in % of core being used, ie up to 400 on a 4-core
+        // _busyThreshold in % of core being used, ie up to 400 on a 4-core
         public BusyFinder(IProcessFinder finder, int busyThreshold, IEventLogger logger)
         {
-            this.finder = finder;
-            this.busyThreshold = busyThreshold;
-            this.logger = logger;
+            _finder = finder;
+            _busyThreshold = busyThreshold;
+            _logger = logger;
         }
 
         // Expensive operations here, evaluates lazily
         public IEnumerable<Process> Find()
         {
-            var data = this.finder.Find();
-            return data.Where(process => this.GetCpuUsage(process) > this.busyThreshold);
+            var data = _finder.Find();
+            return data.Where(process => GetCpuUsage(process) > _busyThreshold);
         }
 
         private int GetCpuUsage(Process process)
         {
-            var cpuCounter = new PerformanceCounter("Process", "% Processor Time", this.GetInstanceName(process), true);
-            this.logger.Log(new IntervalStartingEvent("Beginning to measure CPU usage", BusyFinder.Type));
+            var cpuCounter = new PerformanceCounter("Process", "% Processor Time", GetInstanceName(process), true);
+            _logger.Log(new IntervalStartingEvent("Beginning to measure CPU usage", BusyFinder.Type));
             cpuCounter.NextValue();
             Thread.Sleep(BusyFinder.SampleTime);
             var usage = (int)cpuCounter.NextValue();
-            this.logger.Log(new MeasuredCpuEvent(process, usage, BusyFinder.SampleTime, Type));
-            this.logger.Log(new IntervalStartingEvent("Ending measure of CPU usage", BusyFinder.Type));
+            _logger.Log(new MeasuredCpuEvent(process, usage, BusyFinder.SampleTime, Type));
+            _logger.Log(new IntervalStartingEvent("Ending measure of CPU usage", BusyFinder.Type));
             return usage;
         }
 
@@ -66,7 +66,7 @@ namespace ProcessGremlinImplementations.Finders
                     catch(Exception exception)
                     {
                         // Suppress errors from instances without counters
-                        this.logger.Log(new WarningEvent(exception, BusyFinder.Type));
+                        _logger.Log(new WarningEvent(exception, BusyFinder.Type));
                     }
                 }
             }

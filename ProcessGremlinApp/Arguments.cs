@@ -7,22 +7,22 @@ namespace ProcessGremlinApp
 {
     public class Arguments
     {
-        public Arguments(string invokedVerb, object invokedVerbInstance)
-        {
-            this.InvokedVerb = invokedVerb;
-            this.InvokedVerbInstance = invokedVerbInstance;
-        }
-
         public string InvokedVerb { get; private set; }
         public object InvokedVerbInstance { get; private set; }
 
+        public Arguments(string invokedVerb, object invokedVerbInstance)
+        {
+            InvokedVerb = invokedVerb;
+            InvokedVerbInstance = invokedVerbInstance;
+        }
+
         public bool TryBuildGremlin(IEventLogger logger, out IGremlin gremlin)
         {
-            switch (this.InvokedVerb)
+            switch (InvokedVerb)
             {
                 case Options.KillBusyVerbStr:
                 {
-                    var killOptions = (KillBusySubOptions) this.InvokedVerbInstance;
+                    var killOptions = (KillBusySubOptions) InvokedVerbInstance;
                     var finder = new BusyFinder(new NameBasedFinder(killOptions.ProcessName),
                         killOptions.CpuBusyThreshold, logger);
                     gremlin = new KillGremlin(
@@ -33,7 +33,7 @@ namespace ProcessGremlinApp
                 }
                 case Options.KillStr:
                 {
-                    var killOptions = (CommonOptions) this.InvokedVerbInstance;
+                    var killOptions = (CommonOptions) InvokedVerbInstance;
                     var finder = new NameBasedFinder(killOptions.ProcessName);
                     gremlin =
                         new KillGremlin(
@@ -50,7 +50,7 @@ namespace ProcessGremlinApp
 
         public int GetTimerIntervalMs()
         {
-            return ((CommonOptions) this.InvokedVerbInstance).TimerIntervalMs;
+            return ((CommonOptions) InvokedVerbInstance).TimerIntervalMs;
         }
     }
 }
